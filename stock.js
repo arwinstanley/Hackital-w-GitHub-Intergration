@@ -21,14 +21,20 @@ function Stock(smbl, prc) {
     fill(255,255,255);	//Color to white
     text(this.displayName, this.x, 50 + 50 * offset); 	//width and height are native vars to use too
     fill(10,255,10);	//TODO make the color change according to $$ or alg
-    push();
-      stroke(255,255,255);
-      strokeWeight(2);
-      var tWidth = 0;
-      while(tWidth <= this.price) {
-        rect(this.width + this.padding + this.x, 30 + 50*offset, tWidth/2, 20, 20, 1, 20, 1);
-        tWidth++;
-      }
-    pop();//Revert to old graphics setting
+    this.avgBar(offset);
   }
+
+  this.currentBar = function(offset) {
+    rect(this.width + this.padding + this.x, 30 + 50*offset, this.price/2, 20, 20, 1, 20, 1);
+  }
+
+  this.avgBar = function(offset) {
+    push();
+      strokeWeight(2);
+      stroke(255);
+      fill(200);
+      rect(this.width + this.padding + this.x, 30 + 50*offset, this.price/2, 20, 20, 1, 20, 1);
+    pop();
+  }
+
 }
