@@ -2,6 +2,7 @@
 var stocks = []; //Array of stocks
 var symbols = ["aapl", "googl", "aac", "mmm"]; //Stocks to fetch, TODO get from user input?
 var list;
+var singleArticle;
 //Jared's Stuff
 //var list = new LinkedList();
 
@@ -40,18 +41,17 @@ function setup() {
       var index = i;
       var title = "";
       list = new LinkedList();
+
       for (var i = 0; i < data.articles.length; i++) {
 
         desc = data.articles[i].description;
-				index = i;
-				title =  data.articles[i].title;
-				console.log(desc);
-        //list.append(new Articles(data.articles[i].description, i, data.articles[i].title));
-        //  list.append(new Articles("Hey", i, "Hey"));
+        index = i;
+        title = data.articles[i].title;
+        singleArticle = new Articles(index, desc, title);
+				singleArticle.print();
+
       }
 
-      console.log(data);
-    //  console.log(data.articles[0].author);
 
     });
   });
