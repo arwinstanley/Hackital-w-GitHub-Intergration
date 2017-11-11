@@ -1,10 +1,12 @@
 //QuickStock$®
 var stocks = []; //Array of stocks
 var symbols = ["aapl", "googl", "aac", "mmm"]; //Stocks to fetch, TODO get from user input?
+
+//Jared's Stuff
+var newsOrg = ["business-insider", "fortune"];
+
 var list;
 var singleArticle;
-//Jared's Stuff
-//var list = new LinkedList();
 
 
 function setup() {
@@ -31,9 +33,10 @@ function setup() {
 
   //Jared's Code
   $(document).ready(function() { //jQuery funciton, only called once the document is "ready" wtf that means..
+  for (j = 0; j < newsOrg.length; j++) {
+		var newsOrganization = newsOrg[j];
 
-
-    var URL2 = 'https://newsapi.org/v1/articles?source=business-insider&sortBy=top&apiKey=1e4eec7a67aa42a49ff34214aebe4f86';
+    var URL2 = 'https://newsapi.org/v1/articles?source=' + newsOrganization + '&sortBy=top&apiKey=1e4eec7a67aa42a49ff34214aebe4f86';
 
     $.getJSON(URL2, function(data) { //Grabs the JSON from the URL, and calls a function
 
@@ -51,15 +54,9 @@ function setup() {
 				singleArticle.print();
 
       }
-
-
     });
+	}
   });
-
-
-
-
-
 }
 
 

@@ -1,8 +1,8 @@
 function Articles(indx, desc, name) {
 
-  this.description = desc;
+  this.description = desc.toUpperCase();
   this.index = indx;
-  this.title = name;
+  this.title = name.toUpperCase();;
 
 
 

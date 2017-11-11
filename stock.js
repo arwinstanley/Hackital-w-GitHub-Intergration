@@ -11,6 +11,4 @@ function Stock(smbl, prc) {
   this.padding = 10;
 
 
-//Rounds to 2 decimal places push --set-upstream origin master
-
 }
