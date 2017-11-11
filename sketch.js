@@ -3,7 +3,7 @@ var stocks = [];	//Array of stocks
 var symbols = ["aapl","googl", "aac", "mmm"];	//Stocks to fetch, TODO get from user input?
 
 //Jared's Stuff
-var articleList = new LinkedList();
+
 
 
 
@@ -36,11 +36,20 @@ function setup() {
 	var URL2 = 'https://newsapi.org/v1/articles?source=business-insider&sortBy=top&apiKey=1e4eec7a67aa42a49ff34214aebe4f86';
 
 	$.getJSON(URL2, function(data) {	//Grabs the JSON from the URL, and calls a function
+
+
 		console.log(data);
 		console.log(data.articles["0"].author);
 
 	});
 });
+
+var list = new LinkedList();
+list.append(10);
+list.prepend(15);
+list.print();
+
+
 
 }
 

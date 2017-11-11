@@ -1,7 +1,7 @@
 function Stock(smbl, prc) {
   this.symbol = smbl.toUpperCase();
   //this.name = nm;
-  this.price = fPrice(prc);
+  this.price =  Math.round(prc * 100) / 100;
 
   this.format = " : $"
   this.displayName = this.symbol + this.format + this.price
@@ -12,7 +12,5 @@ function Stock(smbl, prc) {
 
 
 //Rounds to 2 decimal places push --set-upstream origin master
-this.fPrice = function(rawPrice) {
-  return Math.round(rawPrice * 100) / 100;
-}
+
 }

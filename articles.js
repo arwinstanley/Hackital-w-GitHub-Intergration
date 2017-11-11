@@ -4,6 +4,6 @@ function Articles(desc, indx, name) {
   var index = indx;
   var title = name;
 
-}
+
 
 };
