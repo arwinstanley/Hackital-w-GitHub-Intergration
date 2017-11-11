@@ -1,8 +1,6 @@
 function LinkedList() {
   this.head = null;
 
-
-
   this.isEmpty = function() {
     return (this.head === null);
   };

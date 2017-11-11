@@ -1,9 +1,6 @@
 function Articles(desc, indx, name) {
 
-  var description = description.toLowerCase();
-  var index = indx;
-  var title = name;
-
-
-
+  this.description = desc;
+  this.index = indx;
+  this.title = name;
 };
