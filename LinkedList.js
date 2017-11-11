@@ -82,8 +82,7 @@ function LinkedList() {
 
   this.print = function() {
     var output = '[';
-    var current = this.head;
-    while (current !== null) {
+    var current = this.head;while (current !== null) {
       output += current.data;
       if (current.next !== null) {
         output += ',';

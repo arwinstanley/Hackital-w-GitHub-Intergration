@@ -1,7 +1,7 @@
 function Stock(smbl, prc) {
   this.symbol = smbl.toUpperCase();
   //this.name = nm;
-  this.price =  Math.round(prc * 100) / 100;
+  this.price = Math.round(prc * 100) / 100;
 
   this.format = " : $"
   this.displayName = this.symbol + this.format + this.price

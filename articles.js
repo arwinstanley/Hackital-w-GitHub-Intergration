@@ -6,13 +6,13 @@ function Articles(indx, desc, name) {
 
 
 
-this.print = function(){
-var output = "";
+  this.print = function() {
+    var output = "";
 
-output = "[" + this.index + ": " + this.description + ": " + this.title + "]";
-console.log(output);
-return output;
-};
+    output = "[" + this.index + ": " + this.description + ": " + this.title + "]";
+    console.log(output);
+    return output;
+  };
 
 
 };

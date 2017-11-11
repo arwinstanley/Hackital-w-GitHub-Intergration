@@ -33,29 +33,29 @@ function setup() {
 
   //Jared's Code
   $(document).ready(function() { //jQuery funciton, only called once the document is "ready" wtf that means..
-  for (j = 0; j < newsOrg.length; j++) {
-		var newsOrganization = newsOrg[j];
+    for (j = 0; j < newsOrg.length; j++) {
+      var newsOrganization = newsOrg[j];
 
-    var URL2 = 'https://newsapi.org/v1/articles?source=' + newsOrganization + '&sortBy=top&apiKey=1e4eec7a67aa42a49ff34214aebe4f86';
+      var URL2 = 'https://newsapi.org/v1/articles?source=' + newsOrganization + '&sortBy=top&apiKey=1e4eec7a67aa42a49ff34214aebe4f86';
 
-    $.getJSON(URL2, function(data) { //Grabs the JSON from the URL, and calls a function
+      $.getJSON(URL2, function(data) { //Grabs the JSON from the URL, and calls a function
 
-      var desc = "";
-      var index = i;
-      var title = "";
-      list = new LinkedList();
+        var desc = "";
+        var index = i;
+        var title = "";
+        list = new LinkedList();
 
-      for (var i = 0; i < data.articles.length; i++) {
+        for (var i = 0; i < data.articles.length; i++) {
 
-        desc = data.articles[i].description;
-        index = i;
-        title = data.articles[i].title;
-        singleArticle = new Articles(index, desc, title);
-				singleArticle.print();
+          desc = data.articles[i].description;
+          index = i;
+          title = data.articles[i].title;
+          singleArticle = new Articles(index, desc, title);
+          singleArticle.print();
 
-      }
-    });
-	}
+        }
+      });
+    }
   });
 }
 
