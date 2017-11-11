@@ -1,7 +1,11 @@
 //QuickStock$®
 var stocks = [];	//Array of stocks
-var keywords = [];
 var symbols = ["aapl","googl", "aac", "mmm"];	//Stocks to fetch, TODO get from user input?
+
+//Jared's Stuff
+var articleList = new LinkedList();
+
+
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);

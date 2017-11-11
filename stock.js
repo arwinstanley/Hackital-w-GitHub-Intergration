@@ -9,9 +9,10 @@ function Stock(smbl, prc) {
   this.width = textWidth(this.displayName);
   this.x = 20;
   this.padding = 10;
-}
+
 
 //Rounds to 2 decimal places push --set-upstream origin master
 this.fPrice = function(rawPrice) {
   return Math.round(rawPrice * 100) / 100;
+}
 }
