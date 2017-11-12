@@ -40,15 +40,19 @@ function Stock(smbl, nm, prc, average) {
     rect(this.width + this.padding + this.x, 10 + 25*offset, this.avg/2, 20, 20, 1, 20, 1);
     pop();
   }
-this.relevantArticles = function(arr, name){ //takes in an array of articles and the stocks name as a string
+this.relevantArticles = function(arr){ //takes in an array of articles and the stocks name as a string
+if(arr.length > 0){
   var relevant = [];
-  var scores =[];
-   for(int i = 0; i< arr.length; i++){
-       if(arr[i].keySearch(name) !== ""){
+
+   for(var i = 0; i< arr.length; i++){
+       if(arr[i].keySearch(this.name) !== ""){
          relevant.push(arr[i]);
        }
    }
   return relevant;
+}else{
+  return null;
+}
 }
   this.ratingPrice = function() {
     var rating = 0;
@@ -70,9 +74,7 @@ this.relevantArticles = function(arr, name){ //takes in an array of articles and
   }
 
 
-console.log(this.symbol + "," + rating);
-console.log(this.price + " " + this.avg);
-console.log(diff + " " + twentyPercent + " " + fifteenPercent + " " + fivePercent);
+
   return rating;
 
 }
