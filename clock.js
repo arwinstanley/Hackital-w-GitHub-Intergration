@@ -90,7 +90,7 @@ function Clock() {
 
     //time formatting
     push()
-      translate(width - width/4, height/2);
+      translate(width - width/4, height/2-25);
       textSize(40);
       fill(255);
       text(strMonth, -textWidth(strMonth)/2, 0);
