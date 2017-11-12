@@ -21,6 +21,7 @@ var yearWeeks = ["2017-10-20", "2017-09-22", "2017-08-11", "2017-07-14", "2017-0
 //
 function preload() {
   stockFont = loadFont('assets/BebasNeue.otf');
+  titleFont = loadFont('assets/couture-bldit.otf');
 }
 
 function setup() {
@@ -45,7 +46,7 @@ function setup() {
 
 function draw() {	//TODO not drawing to the currect canvas?
 	background(50,50,50,0);
-	textSize(25)
+	textSize(25);
 
 	//Clock Ish
 	clock.update();
@@ -75,8 +76,22 @@ function draw() {	//TODO not drawing to the currect canvas?
 	//News ish
 	push();
 		fill(255,255,255,150);
-		text(chyron,width-chyX, height-2 );
+		text(chyron,width-chyX, height-10 );
 	pop();
+
+  //Title
+  push();
+    fill(255,255,255,230);
+    textSize(15)
+    textFont(titleFont);
+    var msg = "//Displaying current prices vs. yearly averages";
+    text(msg, 20, 40);
+    strokeCap(SQUARE);
+    textFont(stockFont);
+    stroke(255);
+    strokeWeight(4);
+    line(28, 45, textWidth(msg)*1.86, 45 );
+  pop();
 }
 
 //Peter

@@ -8,7 +8,7 @@ function Crypto(smbl, nm, prc, average) {
 
   this.width = textWidth(this.displayName);
   this.x = 20;
-  this.y = height -25;
+  this.y = height -40;
   this.padding = 10;
 
   this.show = function() {

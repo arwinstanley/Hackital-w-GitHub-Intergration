@@ -20,7 +20,7 @@ body {
   background-size: cover;
   background-position: 50% 50%;
   z-index: -1;
-}
+  }
 
 /*#sketch-js {
   position: absolute;
