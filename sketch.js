@@ -147,7 +147,7 @@ function doArticles() {
 
 function specificStock(str) {
   var symbol = str;
-  var name = "JUUL";
+  var name = "QuickStock$";
   var key = 'N6N8STFNCERJ1DTH'; //Personal API Key
   var URL = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=' + symbol + '&interval=1min&apikey=' + key;
   $.getJSON(URL, function(data) {
