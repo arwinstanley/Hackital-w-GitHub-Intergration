@@ -2,7 +2,7 @@ function Stock(smbl, prc) {
   this.symbol = smbl.toUpperCase();
   //this.name = nm;
   this.price = Math.round(prc * 100) / 100;
-  this.avg = this.price + random(-50, 50);
+  this.avg = this.price + random(0, 100);
   this.format = " : $";
   this.displayName = this.symbol + this.format + this.price;
 
@@ -45,5 +45,15 @@ pop();
     fill(200, 200, 200, 200); //transparent
     rect(this.width + this.padding + this.x, 30 + 50*offset, this.avg/2, 20, 20, 1, 20, 1);
     pop();
+  }
+  this.relevantArticles = function(arr, name){ //takes in an array of articles and the stocks name as a string
+    var relevant = [];
+    var scores =[];
+     for(int i = 0; i< arr.length; i++){
+         if(arr[i].keySearch(name) !== ""){
+           relevant.push(arr[i]);
+         }
+     }
+    return relevant;
   }
 }

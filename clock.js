@@ -14,6 +14,7 @@ function Clock() {
   }
 
   this.show = function() {
+    clear()
     push()
       translate(width - width/4, height/2);
       rotate(-90);  //puts top at 12 o clock

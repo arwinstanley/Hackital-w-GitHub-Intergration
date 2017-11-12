@@ -1,11 +1,14 @@
 //QuickStock$®
 var stocks = [];	//Array of stocks
-var symbols = ["aapl"] //,"googl", "aac", "mmm"];	//Stocks to fetch, TODO get from user input?
+var symbols = ["aapl","googl", "aac", "mmm"];	//Stocks to fetch, TODO get from user input?
+var names = ["apple", "google", "aac holdings", "3m"]
 //Jared
 var newsOrg = ["business-insider", "fortune"];
 
 var list;
 var singleArticle;
+var articles = [];
+
 //
 function preload() {
 	stockFont = loadFont('assets/BebasNeue.otf');
@@ -13,6 +16,7 @@ function preload() {
 
 function setup() {
 	myCanvas = createCanvas(windowWidth, windowHeight);
+	//clockCanvas = createCanvas(windowWidth, windowHeight);
 	//Import parrticles?
 	particlesJS.load('particles-js', 'particles.json', function() {
   	console.log('callback - particles.js config loaded');
@@ -20,7 +24,8 @@ function setup() {
 
 	//Graphical Setup
 	clock = new Clock();
-	background(50); //gray bg
+
+	background(50, 50, 50, 0); //transparent
 	textFont(stockFont);
 
 	$(document).ready(function() {	//jQuery funciton, only called once the document is "ready" wtf that means..
@@ -32,7 +37,7 @@ function setup() {
 			$.getJSON(URL, function(data) {	//Grabs the JSON from the URL, and calls a function
 				console.log(data);
 
-				if(typeof data["Meta Data"]["2. Symbol"] !== "undefined" ) {	//Verifies the fetch was successful
+				if(typeof data["Meta Data"]!== "undefined" ) {	//Verifies the fetch was successful
 					var iSymbol = data["Meta Data"]["2. Symbol"]; //Grabs official symbol from data rather than str passed by user
 					var weeks = data["Weekly Time Series"];
 					var lastWeek = data["Meta Data"]["3. Last Refreshed"];
@@ -59,14 +64,14 @@ for (j = 0; j < newsOrg.length; j++) {
         var desc = "";
         var index = i;
         var title = "";
-        list = new LinkedList();
-
+console.log(data);
         for (var i = 0; i < data.articles.length; i++) {
 
           desc = data.articles[i].description;
           index = i;
           title = data.articles[i].title;
           singleArticle = new Articles(index, desc, title);
+					articles[i] = singleArticle;
           singleArticle.print();
 
         }
@@ -76,7 +81,7 @@ for (j = 0; j < newsOrg.length; j++) {
 }
 
 function draw() {	//TODO not drawing to the currect canvas?
-	background(50);
+	background(50, 50, 50, 0);
 
 	textSize(25)
 	clock.update();
