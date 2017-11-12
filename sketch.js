@@ -36,8 +36,10 @@ function setup() {
   textStyle(BOLD);
   input = createInput('Input a stock symbol');
   input.position(windowWidth*0.01, windowHeight-100);
-  button = createButton('💉🔪 💉🔪💉🔪edgy shit edgY sHit 🔪thats 🔫some edgy💉💉 shit right 🔪th🔪 ere💉💉💉 right there 🚬🚬if i do ƽaү so my selｆ 🔫i say so 🔫 thats what im talking about right there right there (chorus: ʳᶦᵍʰᵗ ᵗʰᵉʳᵉ) mMMMMᎷМ🔫 🔪🔪🔪НO0ОଠＯOOＯOОଠଠOoooᵒᵒᵒᵒᵒᵒᵒᵒᵒ🔪🔪🔪 🔫 💉💉 🔪🔪 Edgy shit');
+  button = createButton('乇乂ㄒ尺卂 ㄒ卄丨匚匚');
   button.position(width, 10);
+  //Alex Is sad bcause he doesnet get a working button
+  //button.mousePressed(specificStock(input.value));
   textAlign(CENTER);
   textSize(50);
   //
