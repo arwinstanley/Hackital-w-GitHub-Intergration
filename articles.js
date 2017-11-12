@@ -1,8 +1,9 @@
-function Articles(indx, desc, name) {
+function Articles(indx, desc, name,ur) {
 
   this.index = indx;
   this.description = desc.toUpperCase();
-  this.title = name.toUpperCase();;
+  this.title = name.toUpperCase();
+  this.url = ur;
 
   this.print = function() {
     var output = "";
@@ -23,7 +24,11 @@ this.keySearch = function(key){
     return this.description;
   }
   if(this.title.search(key.toUpperCase()) !== -1){
+<<<<<<< HEAD
     return this.title;
+=======
+    return  this.title;
+>>>>>>> 0711cec9692cbc6880205597208a6ab48a1295f3
   }
   return output;
 }
