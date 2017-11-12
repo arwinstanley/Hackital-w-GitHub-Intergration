@@ -1,4 +1,6 @@
 {
+  "Facebook": "fb",
+  "Apple": "aapl",
   "Google":"googl",
   "Microsoft":"msft",
   "Coca Cola": "ko",
@@ -12,4 +14,5 @@
   "United Postal Service": "ups",
   "Monsanto": "mon",
   "Oracle": "orcl"
+
 }

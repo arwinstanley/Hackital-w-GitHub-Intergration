@@ -13,17 +13,17 @@ function Articles(indx, desc, name) {
   };
 this.keySearch = function(key){
   var output = "";
-  if(description.search(key.toUpperCase()) == -1 && title.search(key.toUpperCase()) == -1){
+  if(this.description.search(key.toUpperCase()) == -1 && this.title.search(key.toUpperCase()) == -1){
     return output;
   }
-  if(description.search(key.toUpperCase()) !== -1 && title.search(key.toUpperCase()) !== -1){
-    output = description + title;
+  if(this.description.search(key.toUpperCase()) !== -1 && this.title.search(key.toUpperCase()) !== -1){
+    output = this.description + this.title;
   }
-  if(description.search(key.toUpperCase()) !== -1){
-    output = description;
+  if(this.description.search(key.toUpperCase()) !== -1){
+    output = this.description;
   }
-  if(title.search(key.toUpperCase()) !== -1){
-    output = title;
+  if(this.title.search(key.toUpperCase()) !== -1){
+    output = this.title;
   }
   return output;
 }
