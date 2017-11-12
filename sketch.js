@@ -8,8 +8,7 @@ var symbolJSON = 'stocks.json';
 
 var btc; //BTC IS TREATED LIKE A STOCK
 var chyX = 0;
-
-
+var num1;
 //Important stuff
 var newsOrg = ["business-insider", "fortune"];
 var yearWeeks = ["2017-10-20", "2017-09-22", "2017-08-11", "2017-07-14", "2017-06-23", "2017-05-12", "2017-04-21", "2017-03-17", "2017-02-03", "2017-01-20"]; //YEARS IN A WEEK
@@ -90,6 +89,13 @@ function draw() { //TODO not drawing to the currect canvas?
   fill(255, 255, 255, 150);
   text(chyron, width - chyX, height - 10);
   pop();
+//change ish
+  push();
+  fill(255, 255, 255, 150);
+  var tText = "";
+  tText += specificStock("aapl");
+  text(tText, width - chyX, height - 60);
+  pop();
 
   //Title
   push();
@@ -141,44 +147,36 @@ function doArticles() {
 
 //Peter
 function doStocks() {
+
+
   $.getJSON('stocks.json', function(data) { //populates symbols from Json
-      for (var name in data) { //Iterates through stocks.json
-        symbols[name] = data[name]; //copies json to array
-        var nm = symbols[name];
-        var symbol = symbols[name]; //Grab current symbol
-        var key = 'N6N8STFNCERJ1DTH'; //Personal API Key
-        var URL = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=' + symbol + '&interval=1min&apikey=' + key;
+    for (var name in data) { //Iterates through stocks.json
+      symbols[name] = data[name]; //copies json to array
+      var nm = symbols[name];
+      var symbol = symbols[name]; //Grab current symbol
+      var key = 'N6N8STFNCERJ1DTH'; //Personal API Key
+      var URL = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=' + symbol + '&interval=1min&apikey=' + key;
 
-        $.getJSON(URL, function(data) { //Grabs the JSON from the URL, and calls a function
+      $.getJSON(URL, function(data) { //Grabs the JSON from the URL, and calls a function
 
-            if (typeof data["Meta Data"] !== "undefined") { //Verifies the fetch was successful
-              var iSymbol = data["Meta Data"]["2. Symbol"]; //Grabs official symbol from data rather than str passed by user
-              var weeks = data["Weekly Time Series"];
-              var lastWeek = data["Meta Data"]["3. Last Refreshed"];
-              var price = weeks[lastWeek]["1. open"]; //Grabs open price from last week
-              var avg = getAvg(weeks);
-              var tempStock = new Stock(iSymbol, name, price, avg);
-              //addHistoryFactor();
+        //    if (typeof data["Meta Data"] !== "undefined") { //Verifies the fetch was successful
+        var iSymbol = data["Meta Data"]["2. Symbol"]; //Grabs official symbol from data rather than str passed by user
+        var weeks = data["Weekly Time Series"];
+        var lastWeek = data["Meta Data"]["3. Last Refreshed"];
+        var price = weeks[lastWeek]["1. open"]; //Grabs open price from last week
+        var avg = getAvg(weeks);
+        var tempStock = new Stock(iSymbol, name, price, avg);
 
-              //console.log(stocks[0]);
-              //console.log(newsFactor);
-              stocks.push(tempStock);
-              console.log(stocks[0]);
-              getNewsRating(stocks[0]);
-              addHistoryFactor();
-              getTotalFactor();
 
-              console.log(historyFactor);
-              console.log(newsFactor);
-              console.log(totalFactor);
+        stocks.push(tempStock);
 
-          } else {
-            console.log("data missing?")
-          }
-        });
+
+  });
     }
   });
-//doNewsRating(stocks[0]);
+
+
+
 }
 
 //Creates a bitcoin ticker
@@ -217,9 +215,6 @@ function getAvg(x) {
   return sum / 12; //Returns the avg price of the last year
 }
 
-
-//Changed Name from getRating
-//adds the rating of the history to an array
 function addHistoryFactor() {
   for (var i = 0; i < stocks.length; i++) {
     historyFactor[i] = stocks[i].ratingPrice();
@@ -227,55 +222,80 @@ function addHistoryFactor() {
 
 }
 
-function getTotalFactor() {
-  for (var i = 0; i < stocks.length; i++) {
-    totalFactor[i] = newsFactor[i] + historyFactor[i];
-  }
 
+
+function specificStock(str) {
+  var symbol = str;
+  var name = str;
+if(str == "fb"){
+name = "facebook";
+} else if(str == "baba"){
+name = "alibaba";
+}else if(str == "csco"){
+name = "cisco";
+}else if(str == "amzn"){
+name = "amazon";
+}else if(str == "msft"){
+name = "microsoft";
 }
 
 
 
+  var key = 'N6N8STFNCERJ1DTH'; //Personal API Key
+  var URL = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=' + symbol + '&interval=1min&apikey=' + key;
+  $.getJSON(URL, function(data) {
+    if (typeof data["Meta Data"] !== "undefined") { //Verifies the fetch was successful
+      var iSymbol = data["Meta Data"]["2. Symbol"]; //Grabs official symbol from data rather than str passed by user
+      var weeks = data["Weekly Time Series"];
+      var lastWeek = data["Meta Data"]["3. Last Refreshed"];
+      var price = weeks[lastWeek]["1. open"]; //Grabs open price from last week
+      var avg = getAvg(weeks);
+      var tempStock = new Stock(iSymbol, name, price, avg);
 
-//Changed from getScore
-//gives News Rating
-function getNewsRating(stock) {
-  var rating = 0;
-  var relevantArticlesList = [];
-  var output = [2];
-  //  console.log(typeof articles);
-  //  console.log((typeof articles !== "undefined"));
-
-  if (typeof articles !== "undefined") {
-
-    relevantArticlesList = stock.relevantArticles(articles);
-  //  console.log(relevantArticlesList);
-    $.getJSON('keywords.json', function(data) {
-      for (var i = 0; i < relevantArticlesList.length; i++) {
-        for (var name in data) {
-
-          if (relevantArticlesList[i].keySearch(name) !== "") {
-            output[i] = data[name];
-          //  console.log(output);
-      //      console.log(output[i]);
-          }
+      var exists = false
+      for(i = 0; i < stocks.length; i++) {
+        if (tempStock.symbol == stocks[i].symbol){
+          exists = true
         }
-
       }
-      for (var i = 0; i < output.length; i++) {
-        rating += output[i];
-        //console.log(rating);
 
+      $.getJSON('keywords.json', function(data) {
+
+        var relevantArticlesList = tempStock.relevantArticles(articles);
+        var output = [];
+        var rating = 0;
+        var history = 0;
+        console.log(tempStock);
+        for (var i = 0; i < relevantArticlesList.length; i++) {
+          for (var name in data) {
+            if (relevantArticlesList[i].keySearch(name) !== "") {
+              output[i] = data[name];
+              console.log(output);
+              console.log(relevantArticlesList);
+            }
+          }
+
+        }
+        for (var i = 0; i < output.length; i++) {
+          rating += output[i];
+          console.log(rating);
+        }
+        var factors = new factor(rating, tempStock.ratingPrice());
+        console.log(factors);
+        totalFactor.push(factors);
+        num1  = factors.add();
+        console.log(num1);
+        return num1;
+      });
+
+
+      if(!exists) {
+        stocks.push(tempStock);
+      } else {
+        input.value(str + " already displaying");
       }
-      newsFactor.push(rating / output.length);
-  //    console.log(rating);
-
+    } else {
+      console.log("data missing?")
+    }
     });
-
-
-  } else {
-    console.log("data missing?")
   }
-
-
-}
