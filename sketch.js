@@ -109,7 +109,8 @@ function doStocks() {
           var avg = getAvg(weeks);
           stocks.push(new Stock(iSymbol, name, price, avg));
           getRating();
-          getScore(stocks[1]);
+					console.log(stocks);
+          getScore(stocks[0]);
         } else {
           console.log("data missing?")
         }
@@ -191,7 +192,6 @@ function getScore(stock) {
     $.getJSON('keywords.json', function(data) {
 
       for (var name in data) { //Iterates through stocks.json
-				console.log(name);
         for (var i = 0; i < relevantArticlesList.length; i++) {
           if (relevantArticlesList[i].keySearch(name) !== "") {
             output.push(data[name]);
