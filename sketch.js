@@ -16,20 +16,12 @@ var yearWeeks = ["2017-10-20", "2017-09-22", "2017-08-11", "2017-07-14", "2017-0
 var btcMonths = [739.00, 966.19, 1189.10, 1081.30, 1435.00, 2191.83, 2191.83, 2420.60, 2854.30, 4718.30, 4366.60, 6450.20];
 
 ////////FACTORS/////////
-<<<<<<< HEAD
-var ratingFactor = [];
-////
-var input, button, greeting;
-/////
-//
-=======
 var historyFactor = [];
 var newsFactor = [];
 var totalFactor = [];
 
 
 
->>>>>>> 0711cec9692cbc6880205597208a6ab48a1295f3
 function preload() {
   stockFont = loadFont('assets/BebasNeue.otf');
   titleFont = loadFont('assets/couture-bldit.otf');
@@ -257,13 +249,6 @@ function getTotalFactor() {
 
 }
 
-<<<<<<< HEAD
-function getScore(stock) {
-  if (articles.length > 0) {
-    var relevantArticlesList = [];
-    var output = [0];
-=======
->>>>>>> 0711cec9692cbc6880205597208a6ab48a1295f3
 
 
 
@@ -286,21 +271,6 @@ function getNewsRating(stock) {
 
           if (relevantArticlesList[i].keySearch(name) !== "") {
             output[i] = data[name];
-<<<<<<< HEAD
-          }else { output[i] =2}
-        }
-			//console.log(relevantArticlesList)
-      }
-    });
-    for (var j = 0; j < output.length; j++) {
-      score += output[j];
-
-    }
-    console.log(output);
-    console.log(score);
-       console.log(score / (output.length));
-    return (score/(output.length));
-=======
           //  console.log(output);
       //      console.log(output[i]);
           }
@@ -318,7 +288,6 @@ function getNewsRating(stock) {
     });
 
 
->>>>>>> 0711cec9692cbc6880205597208a6ab48a1295f3
   } else {
     console.log("data missing?")
   }
