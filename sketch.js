@@ -95,7 +95,7 @@ function doStocks() {
 					var price = weeks[lastWeek]["1. open"];//Grabs open price from last week
 					var avg = getAvg(weeks);
 					stocks.push(new Stock(iSymbol, name, price, avg) );
-				} else {
+} else {
 					console.log("data missing?")
 				}
 			});
@@ -152,7 +152,7 @@ function doArticles() {
 					desc = data.articles[i].description;
 					index = i;
 					title = data.articles[i].title;
-					articlesIndex[i] = singleArticle;
+					articleIndex[i] = singleArticle;
 					articles.push(new Articles(index, desc, title) );
 					//console.log(articles);
 				}

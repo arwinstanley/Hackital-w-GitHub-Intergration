@@ -42,8 +42,7 @@ function Stock(smbl, nm, prc, average) {
   }
 this.relevantArticles = function(arr, name){ //takes in an array of articles and the stocks name as a string
   var relevant = [];
-  var scores =[];
-   for(int i = 0; i< arr.length; i++){
+   for(var i = 0; i< arr.length; i++){
        if(arr[i].keySearch(name) !== ""){
          relevant.push(arr[i]);
        }
