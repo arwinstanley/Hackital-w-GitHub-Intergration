@@ -4,8 +4,6 @@ function Articles(indx, desc, name) {
   this.description = desc.toUpperCase();
   this.title = name.toUpperCase();;
 
-
-
   this.print = function() {
     var output = "";
 

@@ -1,17 +1,63 @@
 function Clock() {
-  var hr, mn, sc, time, d, mnth, yr, tZone;
+  var hr, mn, sc, time, d, mnth, yr, fullTime, strMonth;
   angleMode(DEGREES);
 
-  this.update = function() {
-     hr = hour()%12;
-     mn = minute();
-     sc = second();
-     time = hr + ":" + mn + ":" + sc;
+  //Converts the num to a day
+  this.monthToString = function(num) {
+    var result;
+    switch (num) {
+    case 1:
+        result = "Janury";
+        break;
+    case 2:
+        result = "February";
+        break;
+    case 3:
+        result = "March";
+        break;
+    case 4:
+        result = "April";
+        break;
+    case 5:
+        result = "May";
+        break;
+    case 6:
+        result = "June";
+        break;
+    case 7:
+        result = "July";
+        break;
+    case 8:
+        result = "August";
+        break;
+    case 9:
+        result = "September";
+        break;
+    case 10:
+        result = "October";
+        break;
+    case 11:
+        result = "November";
+        break;
+    case 12:
+        result = "December";
+        break;
+      }
+      return result;
+    }
 
-     d = day();
-     mnth = month();
-     yr = year();
-  }
+    this.update = function() {
+       hr = new Date().getHours()%12;
+       mn = new Date().getMinutes();
+       sc = new Date().getSeconds();
+       time = hr + ":" + mn + ":" + sc;
+
+       d = day();
+       mnth = new Date().getMonth() +1;
+       yr = new Date().getYear();
+
+       strMonth = this.monthToString(mnth) + " " + d + ",";
+    }
 
   this.show = function() {
     clear()
@@ -37,59 +83,19 @@ function Clock() {
 
       //HOURS
       strokeWeight(14);  //Size
-      var endHR = map(mn, 0, 24, 0, 360);
+      var endHR = map(hr, 0, 12, 0, 360);
       stroke(255, 255, 255, endHR);
       arc(0, 0, 328, 328, 0, endHR);
     pop();
 
-    //Text formatting
+    //time formatting
     push()
       translate(width - width/4, height/2);
       textSize(40);
       fill(255);
-      text(time, -textWidth(time)/2, 0);
+      text(strMonth, -textWidth(strMonth)/2, 0);
+      text(time, -textWidth(time)/2, 40);
     pop()
   }
-  //Converts the num to a day
-  this.numToMonth = function(num) {
-    var result;
-    switch (num) {
-    case 1:
-        result = "Janury";
-        break;
-    case 2:
-        day = "February";
-        break;
-    case 3:
-        day = "March";
-        break;
-    case 4:
-        day = "April";
-        break;
-    case 5:
-        day = "May";
-        break;
-    case 6:
-        day = "June";
-        break;
-    case 7:
-        day = "July";
-        break;
-    case 8:
-        day = "August";
-        break;
-    case 9:
-        day = "September";
-        break;
-    case 10:
-        day = "October";
-        break;
-    case 11:
-        day = "November";
-        break;
-    case 12:
-        day = "December";
-        break;
-      }
-    }
+
 }
