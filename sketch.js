@@ -20,9 +20,9 @@ var yearWeeks = ["2017-10-20", "2017-09-22", "2017-08-11", "2017-07-14", "2017-0
 
 ////////FACTORS/////////
 var ratingFactor = [];
-
-
-
+////
+var input, button, greeting;
+/////
 //
 function preload() {
   stockFont = loadFont('assets/BebasNeue.otf');
@@ -31,6 +31,21 @@ function preload() {
 
 function setup() {
   myCanvas = createCanvas(windowWidth, windowHeight);
+/**
+  input = createInput();
+  input.position(20, 65);
+
+  button = createButton('submit');
+  button.position(input.x + input.width, 65);
+  button.mousePressed(greet);
+
+  greeting = createElement('h2', 'what is your name?');
+  greeting.position(20, 5);
+
+  textAlign(CENTER);
+  textSize(50);
+**/
+
   //clockCanvas = createCanvas(windowWidth, windowHeight);
   //Import parrticles?
   particlesJS.load('particles-js', 'particles.json', function() {
@@ -200,7 +215,7 @@ function getRating() {
 function getScore(stock) {
   if (articles.length > 0) {
     var relevantArticlesList = [];
-    var output = [];
+    var output = [0];
 
     var score = 0;
     relevantArticlesList = stock.relevantArticles(articles);
@@ -209,23 +224,20 @@ function getScore(stock) {
       for (var name in data) { //Iterates through stocks.json
         for (var i = 0; i < relevantArticlesList.length; i++) {
           if (relevantArticlesList[i].keySearch(name) !== "") {
-            output.push(data[name]);
-          }else { output.push(2)}
+            output[i] = data[name];
+          }else { output[i] =2}
         }
-
-
 			//console.log(relevantArticlesList)
-
       }
-			for (var j = 0; j < output.length; j++) {
-				score += output[j];
-
-			}
-			console.log(output);
-			console.log(score);
-			   console.log(score / (output.length));
-			return (score/(output.length));
     });
+    for (var j = 0; j < output.length; j++) {
+      score += output[j];
+
+    }
+    console.log(output);
+    console.log(score);
+       console.log(score / (output.length));
+    return (score/(output.length));
   } else {
     return -1;
   }

@@ -17,13 +17,13 @@ this.keySearch = function(key){
     return output;
   }
   if(this.description.search(key.toUpperCase()) !== -1 && this.title.search(key.toUpperCase()) !== -1){
-    output = this.description + this.title;
+    return this.description + this.title;
   }
   if(this.description.search(key.toUpperCase()) !== -1){
-    output = this.description;
+    return this.description;
   }
   if(this.title.search(key.toUpperCase()) !== -1){
-    output = this.title;
+    return this.title;
   }
   return output;
 }
