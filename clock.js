@@ -62,7 +62,7 @@ function Clock() {
   this.show = function() {
     clear()
     push()
-      translate(width - width/4, height/2);
+      translate(width - width/4, height/2-25);
       rotate(-90);  //puts top at 12 o clock
       strokeCap(SQUARE);  //Sharp type *_*
       stroke(255);  //White stroke

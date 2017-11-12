@@ -57,6 +57,9 @@ function draw() {	//TODO not drawing to the currect canvas?
 		stocks[i].show(i);	//Dras the stocks to the screen
 	}
 	//coin
+	if(typeof btc !== "undefined"){
+		btc.show();
+	}
 
 	//Article ish
 	var chyron = "";
@@ -107,14 +110,11 @@ function doStocks() {
 function doBTC() {
 		var URL = 'https://blockchain.info/ticker';
 		$.getJSON(URL, function(data) {
-			console.log("poop");
 			var price = data.USD.buy;
 			var symbol = "BTC";
 			var name = "Bitcoin";
 			var avg = getBTCAvg();
-			btc = new Stock(symbol, name, price, avg);
-			stocks.push(btc);
-
+			btc = new Crypto(symbol, name, price, avg);
 	});
 }
 
@@ -152,7 +152,7 @@ function doArticles() {
 					desc = data.articles[i].description;
 					index = i;
 					title = data.articles[i].title;
-					articlesIndex[i] = singleArticle;
+					articleIndex[i] = singleArticle;
 					articles.push(new Articles(index, desc, title) );
 					//console.log(articles);
 				}
