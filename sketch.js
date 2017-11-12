@@ -20,6 +20,8 @@ var historyFactor = [];
 var newsFactor = [];
 var totalFactor = [];
 
+var input, button, greeting;
+
 
 
 function preload() {
@@ -28,57 +30,42 @@ function preload() {
 }
 
 function setup() {
-  myCanvas = createCanvas(windowWidth, windowHeight);
-/**
-  input = createInput();
-  input.position(20, 65);
-
-  button = createButton('submit');
-  button.position(input.x + input.width, 65);
-  button.mousePressed(greet);
-
-  greeting = createElement('h2', 'what is your name?');
-  greeting.position(20, 5);
-
+    //Button ish
+  createCanvas(windowWidth, windowHeight)
+  background(255,255,255,0);
+  textStyle(BOLD);
+  input = createInput('Input a stock symbol');
+  input.position(windowWidth*0.01, windowHeight-100);
+  button = createButton('💉🔪 💉🔪💉🔪edgy shit edgY sHit 🔪thats 🔫some edgy💉💉 shit right 🔪th🔪 ere💉💉💉 right there 🚬🚬if i do ƽaү so my selｆ 🔫i say so 🔫 thats what im talking about right there right there (chorus: ʳᶦᵍʰᵗ ᵗʰᵉʳᵉ) mMMMMᎷМ🔫 🔪🔪🔪НO0ОଠＯOOＯOОଠଠOoooᵒᵒᵒᵒᵒᵒᵒᵒᵒ🔪🔪🔪 🔫 💉💉 🔪🔪 Edgy shit');
+  button.position(width, 10);
   textAlign(CENTER);
   textSize(50);
-**/
+  //
 
+createCanvas(windowWidth, windowHeight);
   //clockCanvas = createCanvas(windowWidth, windowHeight);
   //Import parrticles?
   particlesJS.load('particles-js', 'particles.json', function() {
     //console.log('callback - particles.js config loaded');
   });
-
   //Graphical Setup
   clock = new Clock();
   background(50, 50, 50, 0); //gray bg
   textFont(stockFont);
 
   $(document).ready(function() { //jQuery funciton, only called once the document is "ready" wtf that means..
-
-
-
     doArticles();
     doStocks();
     doBTC();
-
-
-
   });
-
-
-
 }
 
 function draw() { //TODO not drawing to the currect canvas?
   background(50, 50, 50, 0);
   textSize(25);
-
   //Clock Ish
   clock.update();
   clock.show()
-
   //Stock ish
   textSize(25)
   for (var i = 0; i < stocks.length; i++) {
@@ -121,6 +108,14 @@ function draw() { //TODO not drawing to the currect canvas?
   pop();
 }
 
+function keyPressed() {
+  console.log(keyCode);
+  if(keyCode == 13) { //13 === enter
+    specificStock(input.value());
+    input.value('Input a stock symbol');
+  }
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Jared
 
@@ -141,17 +136,46 @@ function doArticles() {
         title = data.articles[i].title;
         url = data.articles[i].url;
         articles.push(new Articles(index, desc, title, url)); //adds the aricle to a articles array
-
       }
       //  console.log(articles);
     });
-
   }
 
 }
 
+function specificStock(str) {
+  var symbol = str;
+  var name = "JUUL";
+  var key = 'N6N8STFNCERJ1DTH'; //Personal API Key
+  var URL = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=' + symbol + '&interval=1min&apikey=' + key;
+  $.getJSON(URL, function(data) {
+    if (typeof data["Meta Data"] !== "undefined") { //Verifies the fetch was successful
+      var iSymbol = data["Meta Data"]["2. Symbol"]; //Grabs official symbol from data rather than str passed by user
+      var weeks = data["Weekly Time Series"];
+      var lastWeek = data["Meta Data"]["3. Last Refreshed"];
+      var price = weeks[lastWeek]["1. open"]; //Grabs open price from last week
+      var avg = getAvg(weeks);
+      var tempStock = new Stock(iSymbol, name, price, avg);
 
-
+      var exists = false
+      for(i = 0; i < stocks.length; i++) {
+        if (tempStock.symbol == stocks[i].symbol){
+          exists = true
+        }
+      }
+      if(!exists) {
+        stocks.push(tempStock);
+        getNewsRating(tempStock);
+        addHistoryFactor();
+        getTotalFactor();
+      } else {
+        input.value(str + " already displaying");
+      }
+    } else {
+      console.log("data missing?")
+    }
+    });
+  }
 
 
 //Peter
@@ -165,7 +189,6 @@ function doStocks() {
         var URL = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=' + symbol + '&interval=1min&apikey=' + key;
 
         $.getJSON(URL, function(data) { //Grabs the JSON from the URL, and calls a function
-
             if (typeof data["Meta Data"] !== "undefined") { //Verifies the fetch was successful
               var iSymbol = data["Meta Data"]["2. Symbol"]; //Grabs official symbol from data rather than str passed by user
               var weeks = data["Weekly Time Series"];
@@ -178,14 +201,9 @@ function doStocks() {
               //console.log(stocks[0]);
               //console.log(newsFactor);
               stocks.push(tempStock);
-              console.log(stocks[0]);
               getNewsRating(stocks[0]);
               addHistoryFactor();
               getTotalFactor();
-
-              console.log(historyFactor);
-              console.log(newsFactor);
-              console.log(totalFactor);
 
           } else {
             console.log("data missing?")
