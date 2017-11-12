@@ -10,16 +10,10 @@ function Stock(smbl, nm, prc, average) {
   this.x = 20;
   this.padding = 10;
 
-
-  //Rounds to 2 decimal places
-  //this.fPrice = function(rawPrice) {
-  //  return Math.round(rawPrice * 100) / 100;
-  //}
-
   this.show = function(offset) {
     textSize(25);
     fill(255,255,255);	//Color to white
-    text(this.displayName, this.x, 50 + 50 * offset); 	//width and height are native vars to use too
+    text(this.displayName, this.x, 30 + 25 * offset); 	//width and height are native vars to use too
     fill(10,255,10);	//TODO make the color change according to $$ or alg
     this.currentBar(offset);
     this.avgBar(offset);
@@ -34,7 +28,7 @@ function Stock(smbl, nm, prc, average) {
       } else { //Below Avg
           fill(200, 50, 50, 255); //transparent
       }
-      rect(this.width + this.padding + this.x, 30 + 50*offset, this.price/2, 20, 20, 1, 20, 1);
+      rect(this.width + this.padding + this.x, 10 + 25*offset, this.price/2, 20, 20, 1, 20, 1);
       pop();
   }
 
@@ -43,7 +37,7 @@ function Stock(smbl, nm, prc, average) {
     strokeWeight(2);
     stroke(255);
     fill(200, 200, 200, 200); //transparent
-    rect(this.width + this.padding + this.x, 30 + 50*offset, this.avg/2, 20, 20, 1, 20, 1);
+    rect(this.width + this.padding + this.x, 10 + 25*offset, this.avg/2, 20, 20, 1, 20, 1);
     pop();
   }
 }
