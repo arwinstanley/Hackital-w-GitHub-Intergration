@@ -1,8 +1,8 @@
-function Stock(smbl, prc) {
+function Stock(smbl, nm, prc, average) {
   this.symbol = smbl.toUpperCase();
-  //this.name = nm;
+  this.name = nm;
   this.price = Math.round(prc * 100) / 100;
-  this.avg = this.price + random(-50, 50);
+  this.avg = average;
   this.format = " : $";
   this.displayName = this.symbol + this.format + this.price;
 
@@ -27,15 +27,15 @@ function Stock(smbl, prc) {
 
   this.currentBar = function(offset) {
     push()
-strokeWeight(2);
-stroke(255);
-if(this.price > this.avg) { //Above Avg
-fill(50, 200, 50, 255); //transparent
-} else { //Below Avg
-fill(200, 50, 50, 255); //transparent
-}
-rect(this.width + this.padding + this.x, 30 + 50*offset, this.price/2, 20, 20, 1, 20, 1);
-pop();
+      strokeWeight(2);
+      stroke(255);
+      if(this.price > this.avg) { //Above Avg
+          fill(50, 200, 50, 255); //transparent
+      } else { //Below Avg
+          fill(200, 50, 50, 255); //transparent
+      }
+      rect(this.width + this.padding + this.x, 30 + 50*offset, this.price/2, 20, 20, 1, 20, 1);
+      pop();
   }
 
   this.avgBar = function(offset) {

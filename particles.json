@@ -20,7 +20,7 @@
         "nb_sides": 5
       },
       "image": {
-        "src": "https://bitcoin.org/img/icons/opengraph.png",
+        "src": "assets/btc.png",
         "width": 100,
         "height": 100
       }

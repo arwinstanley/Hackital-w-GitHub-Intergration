@@ -4,8 +4,6 @@ function Articles(indx, desc, name) {
   this.index = indx;
   this.title = name.toUpperCase();;
 
-
-
   this.print = function() {
     var output = "";
 
@@ -13,6 +11,4 @@ function Articles(indx, desc, name) {
     console.log(output);
     return output;
   };
-
-
 };
