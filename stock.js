@@ -1,3 +1,4 @@
+//Holds the symbol name and price of any given stock
 function Stock(smbl, nm, prc, average) {
   this.symbol = smbl.toUpperCase();
   this.name = nm;
@@ -10,6 +11,7 @@ function Stock(smbl, nm, prc, average) {
   this.x = 20;
   this.padding = 10;
 
+  //Displays the symbol, price and visualization bars of the current price vs. the yearly average
   this.show = function(offset) {
     textSize(25);
     fill(255,255,255);	//Color to white
@@ -19,6 +21,7 @@ function Stock(smbl, nm, prc, average) {
     this.avgBar(offset);
   }
 
+  //Displays the current price visualization
   this.currentBar = function(offset) {
     push()
       strokeWeight(2);
@@ -32,6 +35,7 @@ function Stock(smbl, nm, prc, average) {
       pop();
   }
 
+  //Displays the average yearly price of the stock
   this.avgBar = function(offset) {
     push();
     strokeWeight(2);
@@ -40,6 +44,7 @@ function Stock(smbl, nm, prc, average) {
     rect(this.width + this.padding + this.x, 60 + 25*offset, this.avg/2, 20, 20, 1, 20, 1);
     pop();
   }
+  //returns an array of articles relevant to the stock
 this.relevantArticles = function(arr){ //takes in an array of articles and the stocks name as a string
 if(arr.length > 0){
   var relevant = [];
@@ -54,6 +59,7 @@ if(arr.length > 0){
   return null;
 }
 }
+// reurns a rating of the price
   this.ratingPrice = function() {
     var rating = 0;
     var diff = this.price - this.avg;

@@ -1,3 +1,4 @@
+//Crypto currency class used by the BTC ticker
 function Crypto(smbl, nm, prc, average) {
   this.symbol = smbl.toUpperCase();
   this.name = nm;
@@ -11,7 +12,7 @@ function Crypto(smbl, nm, prc, average) {
   this.y = height -40;
   this.padding = 10;
 
-  this.show = function() {
+  this.show = function() {  //Displays the symbol, price, and net change vs avg bars
     textSize(25);
     fill(255,255,255);	//Color to white
     text(this.displayName, this.x, this.y);
@@ -20,6 +21,7 @@ function Crypto(smbl, nm, prc, average) {
     this.avgBar();
   }
 
+  //Current price visualization
   this.currentBar = function() {
     push()
       strokeWeight(2);
@@ -30,6 +32,7 @@ function Crypto(smbl, nm, prc, average) {
     pop();
   }
 
+  //Average price visualization
   this.avgBar = function() {
     push();
       strokeWeight(2);
@@ -38,5 +41,4 @@ function Crypto(smbl, nm, prc, average) {
       rect(this.width + this.padding + this.x, this.y-20, this.avg/20, 20, 20, 1, 20, 1);
     pop();
   }
-
 }

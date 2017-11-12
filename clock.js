@@ -1,9 +1,10 @@
+//Clock class
 function Clock() {
-  var hr, mn, sc, time, d, mnth, yr, fullTime, strMonth;
+  var hr, mn, sc, time, d, mnth, yr, fullTime, strMonth;  //Declares variables for determining time
   angleMode(DEGREES);
 
   //Converts the num to a day
-  this.monthToString = function(num) {
+  this.monthToString = function(num) {  //Converts the month int to a string value
     var result;
     switch (num) {
     case 1:
@@ -46,11 +47,12 @@ function Clock() {
       return result;
     }
 
+    //Updates the time variables
     this.update = function() {
        hr = new Date().getHours()%12;
        mn = new Date().getMinutes();
        sc = new Date().getSeconds();
-       time = hr + ":" + mn + ":" + sc;
+       time = hr + ":" + mn + ":" + sc; //Builds the string to be displayed
 
        d = day();
        mnth = new Date().getMonth() +1;
@@ -59,6 +61,7 @@ function Clock() {
        strMonth = this.monthToString(mnth) + " " + d + ",";
     }
 
+  //Draws date/time information
   this.show = function() {
     clear()
     push()

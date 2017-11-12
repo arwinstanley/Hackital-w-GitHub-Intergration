@@ -4,8 +4,6 @@ var symbols = [] //["aapl","googl", "aac", "mmm"];
 var articles = []; //[1,"Trump is crazy", "McCain was like..."]
 var symbolJSON = 'stocks.json';
 
-
-
 var btc; //BTC IS TREATED LIKE A STOCK
 var chyX = 0;
 var num1;
@@ -19,11 +17,10 @@ var historyFactor = [];
 var newsFactor = [];
 var totalFactor = [];
 
+///////////////UIJAUNTS////////////////////////
 var input, button, greeting;
 
-
-
-function preload() {
+function preload() {  //Preloads fonts
   stockFont = loadFont('assets/BebasNeue.otf');
   titleFont = loadFont('assets/couture-bldit.otf');
 }
@@ -44,20 +41,19 @@ function setup() {
   //
 
 createCanvas(windowWidth, windowHeight);
-  //clockCanvas = createCanvas(windowWidth, windowHeight);
   //Import parrticles?
-  particlesJS.load('particles-js', 'particles.json', function() {
+  particlesJS.load('particles-js', 'particles.json', function() { //Loads the particle system
     //console.log('callback - particles.js config loaded');
   });
   //Graphical Setup
-  clock = new Clock();
+  clock = new Clock();  //Creates the clock
   background(50, 50, 50, 0); //gray bg
   textFont(stockFont);
 
-  $(document).ready(function() { //jQuery funciton, only called once the document is "ready" wtf that means..
-    doArticles();
-    doStocks();
-    doBTC();
+  $(document).ready(function() { //jQuery funciton, only called once the document is ready
+    doArticles(); //Queries the news APIs and fetches information from resulting JSON
+    doStocks(); //Queries the stock API and fetches information from resulting JSON
+    doBTC();  //Queries the BTC API
   });
 }
 
@@ -65,8 +61,8 @@ function draw() { //TODO not drawing to the currect canvas?
   background(50, 50, 50, 0);
   textSize(25);
   //Clock Ish
-  clock.update();
-  clock.show()
+  clock.update(); //Updates clock info
+  clock.show()  //Draws clock info
   //Stock ish
   textSize(25)
   for (var i = 0; i < stocks.length; i++) {
@@ -74,7 +70,7 @@ function draw() { //TODO not drawing to the currect canvas?
   }
   //coin
   if (typeof btc !== "undefined") {
-    btc.show();
+    btc.show(); //Draws the BTC ticker
   }
 
   //Article ish
@@ -82,7 +78,7 @@ function draw() { //TODO not drawing to the currect canvas?
   for (var i = 0; i < articles.length; i++) {
     chyron += articles[i].title + "\t\t | \t\t";
   }
-  if (chyX < textWidth(chyron)) { //Repeats
+  if (chyX < textWidth(chyron)) { //Scrolls the news feed along the bottom of the screen
     chyX += 3;
   } else {
     chyX = 0;
@@ -94,25 +90,28 @@ function draw() { //TODO not drawing to the currect canvas?
   text(chyron, width - chyX, height - 10);
   pop();
 //change ish
+////////This is one of our Future Implementations with the algorithm///////////
+/**
   push();
   fill(255, 255, 255, 150);
   var tText = "";
-  tText += specificStock("aapl");
-  text(tText, width - chyX, height - 60);
-  pop();
+  tText += specificStock(input.value);
 
+  text(tText, width -100, height - 100);
+  pop();
+**/
   //Title
   push();
-  fill(255, 255, 255, 230);
-  textSize(15)
-  textFont(titleFont);
-  var msg = "//Displaying current prices vs. yearly averages";
-  text(msg, 20, 40);
-  strokeCap(SQUARE);
-  textFont(stockFont);
-  stroke(255);
-  strokeWeight(4);
-  line(28, 45, textWidth(msg) * 1.86, 45);
+    fill(255, 255, 255, 230);
+    textSize(15)
+    textFont(titleFont);
+    var msg = "//Displaying current prices vs. yearly averages";
+    text(msg, 20, 40);
+    strokeCap(SQUARE);
+    textFont(stockFont);
+    stroke(255);
+    strokeWeight(4);
+    line(28, 45, textWidth(msg) * 1.86, 45);
   pop();
 }
 
@@ -133,7 +132,7 @@ function doArticles() {
     var URL2 = 'https://newsapi.org/v1/articles?source=' + newsOrganization + '&sortBy=top&apiKey=1e4eec7a67aa42a49ff34214aebe4f86';
 
     $.getJSON(URL2, function(data) { //Grabs the JSON from the URL, and calls a function
-
+//Variables
       var desc = "";
       var index = i;
       var title = "";
@@ -150,7 +149,7 @@ function doArticles() {
   }
 
 }
-
+/*
 function specificStock(str) {
   var symbol = str;
   var name = "QuickStock$";
@@ -184,12 +183,10 @@ function specificStock(str) {
     }
     });
   }
-
+*/
 
 //Peter
 function doStocks() {
-
-
   $.getJSON('stocks.json', function(data) { //populates symbols from Json
       for (var name in data) { //Iterates through stocks.json
         symbols[name] = data[name]; //copies json to array
@@ -207,7 +204,6 @@ function doStocks() {
               var avg = getAvg(weeks);
               var tempStock = new Stock(iSymbol, name, price, avg);
               //addHistoryFactor();
-
               //console.log(stocks[0]);
               //console.log(newsFactor);
               stocks.push(tempStock);
@@ -218,9 +214,6 @@ function doStocks() {
         });
     }
   });
-
-
-
 }
 
 //Creates a bitcoin ticker
@@ -240,7 +233,6 @@ function doBTC() {
 //Creates a BTC avg
 function getBTCAvg() {
   var sum = 0;
-
   for (var i = 0; i < btcMonths.length; i++) {
     sum += Math.round(btcMonths[i] * 100) / 100;
   }
@@ -252,7 +244,6 @@ function getBTCAvg() {
 //Takes in weeks
 function getAvg(x) {
   var sum = 0;
-
   for (var i = 0; i < yearWeeks.length; i++) {
     sum += Math.round(x[yearWeeks[i]]["1. open"] * 100) / 100; //Converts from string to num
   }
@@ -263,14 +254,12 @@ function addHistoryFactor() {
   for (var i = 0; i < stocks.length; i++) {
     historyFactor[i] = stocks[i].ratingPrice();
   }
-
 }
-
-
-
-function specificStock(str) {
+//Gets a specific stock and returns the ticker
+function specificStock(str) {//str is the symbol
   var symbol = str;
   var name = str;
+  //couldnt finish but idea is str is sent in and its transfered to the name
 if(str == "fb"){
 name = "facebook";
 } else if(str == "baba"){
@@ -281,9 +270,9 @@ name = "cisco";
 name = "amazon";
 }else if(str == "msft"){
 name = "microsoft";
+}else if(str == "nke"){
+name = "nike";
 }
-
-
 
   var key = 'N6N8STFNCERJ1DTH'; //Personal API Key
   var URL = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=' + symbol + '&interval=1min&apikey=' + key;
@@ -295,7 +284,8 @@ name = "microsoft";
       var price = weeks[lastWeek]["1. open"]; //Grabs open price from last week
       var avg = getAvg(weeks);
       var tempStock = new Stock(iSymbol, name, price, avg);
-
+console.log(tempStock);
+//determines whether stock already exists
       var exists = false
       for(i = 0; i < stocks.length; i++) {
         if (tempStock.symbol == stocks[i].symbol){
@@ -303,16 +293,18 @@ name = "microsoft";
         }
       }
 
+//json file for the keywords//Ugh
       $.getJSON('keywords.json', function(data) {
 
+//Variables
         var relevantArticlesList = tempStock.relevantArticles(articles);
-        var output = [];
+        var output = [];//should hold the number returned
         var rating = 0;
         var history = 0;
         console.log(tempStock);
-        for (var i = 0; i < relevantArticlesList.length; i++) {
-          for (var name in data) {
-            if (relevantArticlesList[i].keySearch(name) !== "") {
+        for (var i = 0; i < relevantArticlesList.length; i++) {//loops through each of the relevent articles with the word
+          for (var name in data) {//goes through each word in the keyword list
+            if (relevantArticlesList[i].keySearch(name) !== "") {//if relevent article contains a keyword then add it to the output as 3 if good 1 if bad
               output[i] = data[name];
               console.log(output);
               console.log(relevantArticlesList);
@@ -321,22 +313,22 @@ name = "microsoft";
 
         }
         for (var i = 0; i < output.length; i++) {
-          rating += output[i];
+          rating += output[i];//gets the rating of the output
           console.log(rating);
         }
-        var factors = new factor(rating, tempStock.ratingPrice());
+        var factors = new factor((rating/output.length), tempStock.ratingPrice());
         console.log(factors);
-        totalFactor.push(factors);
-        num1  = factors.add();
+        totalFactor.push(factors);//pushes to the array factors
+        num1  = factors.add();//get num1 as the total
         console.log(num1);
         return num1;
       });
 
 
-      if(!exists) {
+      if(!exists) {//if it doesnt exist create the stock
         stocks.push(tempStock);
       } else {
-        input.value(str + " already displaying");
+        input.value(str + " already displaying");//checks if the stock is already created
       }
     } else {
       console.log("data missing?")
