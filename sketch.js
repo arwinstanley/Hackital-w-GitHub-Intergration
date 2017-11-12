@@ -11,13 +11,14 @@ var chyX = 0;
 //Jared
 var newsOrg = ["business-insider", "fortune"];
 
-var list;
 var singleArticle;
 var articleIndex = [];
+var yearWeeks = ["2017-10-20", "2017-09-22", "2017-08-11", "2017-07-14", "2017-06-23", "2017-05-12", "2017-04-21", "2017-03-17", "2017-02-03", "2017-01-20"]; //YEARS IN A WEEK
+
 
 //
 function preload() {
-	stockFont = loadFont('assets/BebasNeue.otf');
+  stockFont = loadFont('assets/BebasNeue.otf');
 }
 
 function setup() {
@@ -42,9 +43,9 @@ function setup() {
 function draw() {	//TODO not drawing to the currect canvas?
 	background(50,50,50,0);
 
-	textSize(25)
-	clock.update();
-	clock.show()
+  textSize(25)
+  clock.update();
+  clock.show()
 
 	textSize(25)
 	for(var i = 0; i < stocks.length; i++) {
