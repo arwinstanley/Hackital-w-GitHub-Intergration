@@ -70,8 +70,8 @@ function doStocks() {
 		}
 	});
 
-	for(j = 0; j < symbols.length; j++) {	//Iterate through the supplied symbols
-		var symbol = symbols[j];	//Grab current symbol
+	for(var s in symbols) {	//Iterate through the supplied symbols
+		var symbol = s	//Grab current symbol
 		var key = 'N6N8STFNCERJ1DTH';	//Personal API Key
 		var URL = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol='+symbol+'&interval=1min&apikey='+key;
 
